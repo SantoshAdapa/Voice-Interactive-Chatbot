@@ -1,0 +1,10 @@
+Purpose: Lists all the Python libraries your project needs.
+
+Anyone can install them with:
+pip install -r requirements.txt
+
+For this project, the file should contain:
+google-generativeai
+SpeechRecognition
+pyttsx3
+flask
