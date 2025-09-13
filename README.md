@@ -57,15 +57,14 @@ The chatbot also features a **Flask-powered web interface** where users can swit
 ---
 
 ## 📂 Project Structure
-    ```
     website/
     ├── __pycache__/
     │   └── personas.cpython-313.pyc
     ├── static/
     │   ├── script.js
     │   ├── styles.css
-    │   └── templates/
-    ├── index.html
+    ├── templates/
+        └── index.html
     ├── app.py
     ├── personas.py
     README.md
