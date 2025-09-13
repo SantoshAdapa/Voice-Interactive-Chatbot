@@ -53,8 +53,6 @@ The chatbot also features a **Flask-powered web interface** where users can swit
 - Switch personas (Raju, Baahubali, Assistant)
 
 ## 📂 Project Structure
-    ```bash
-
     Voice-Interactive-Chatbot/
     │── chatbot.py          # Main chatbot (voice + Flask web)
     │── personas.py         # Persona definitions
