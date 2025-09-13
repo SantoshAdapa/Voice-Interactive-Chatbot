@@ -33,7 +33,9 @@ The chatbot also features a **Flask-powered web interface** where users can swit
 3. **Install dependencies**
    ```bash
    pip install -r requirements.txt
-   
+
+---
+
 ## ▶️ Usage
 
 1. **Run as a Voice Chatbot**
@@ -52,6 +54,8 @@ The chatbot also features a **Flask-powered web interface** where users can swit
 - Chat with the bot using the web UI
 - Switch personas (Raju, Baahubali, Assistant)
 
+---
+
 ## 📂 Project Structure
     Voice-Interactive-Chatbot/
     │── chatbot.py          # Main chatbot (voice + Flask web)
@@ -60,6 +64,8 @@ The chatbot also features a **Flask-powered web interface** where users can swit
     │── website/
     │   └── index.html      # Web interface template
     └── README.md           # Project documentation
+
+---
 
 ## ✨ Example Personas
 
@@ -71,6 +77,8 @@ The chatbot also features a **Flask-powered web interface** where users can swit
 
 - **Assistant**  
   Calm, professional, task-focused helper.  
+
+---
 
 ## 🔒 API Key Setup
 This project requires a Google Gemini API key.
