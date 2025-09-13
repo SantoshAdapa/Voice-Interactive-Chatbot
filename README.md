@@ -74,7 +74,7 @@ The chatbot also features a **Flask-powered web interface** where users can swit
 
 ## 🔒 API Key Setup
 This project requires a Google Gemini API key.
-Replace the placeholder in chatbot.py with your actual key:
+Replace the placeholder in `chatbot.py` with your actual key:
 ```python
 genai.configure(api_key="YOUR_API_KEY_HERE")
 
