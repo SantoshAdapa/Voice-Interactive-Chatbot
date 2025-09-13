@@ -34,43 +34,49 @@ The chatbot also features a **Flask-powered web interface** where users can swit
    ```bash
    pip install -r requirements.txt
    
-▶️ Usage
-1. Run as a Voice Chatbot
-python chatbot.py
+## ▶️ Usage
 
+1. **Run as a Voice Chatbot**
+   ```bash
+   python chatbot.py
 
-Speak into your microphone 🎤
+- Speak into your microphone 🎤
+- The bot replies with voice 🗣️
+- Say “exit” anytime to quit.
 
-The bot replies with voice 🗣️
+2. **Run as a Web Application**
+   ```bash
+    python chatbot.py
+   
+- Open your browser at http://127.0.0.1:5000/
+- Chat with the bot using the web UI
+- Switch personas (Raju, Baahubali, Assistant)
 
-Say “exit” anytime to quit.
+## 📂 Project Structure
+    ```bash
 
-2. Run as a Web Application
-python chatbot.py
+    Voice-Interactive-Chatbot/
+    │── chatbot.py          # Main chatbot (voice + Flask web)
+    │── personas.py         # Persona definitions
+    │── requirements.txt    # Python dependencies
+    │── website/
+    │   └── index.html      # Web interface template
+    └── README.md           # Project documentation
 
+## ✨ Example Personas
 
-Open your browser at http://127.0.0.1:5000/
+- **Raju (Khaleja)**  
+  Clever, sarcastic, mixes Telugu + English, playful roasting.  
 
-Chat with the bot using the web UI
+- **Baahubali**  
+  Domain-specific, answers only about Mahishmati & Baahubali.  
 
-Switch personas (Raju, Baahubali, Assistant)
+- **Assistant**  
+  Calm, professional, task-focused helper.  
 
-📂 Project Structure
-Voice-Interactive-Chatbot/
-│── chatbot.py          # Main chatbot (voice + Flask web)
-│── personas.py         # Persona definitions
-│── requirements.txt    # Python dependencies
-│── website/
-│   └── index.html      # Web interface template
-└── README.md           # Project documentation
-
-⚙️ Requirements
-
-Your requirements.txt should include:
-
-google-generativeai
-SpeechRecognition
-pyttsx3
-flask
-
+## 🔒 API Key Setup
+This project requires a Google Gemini API key.
+Replace the placeholder in chatbot.py with your actual key:
+```python
+genai.configure(api_key="YOUR_API_KEY_HERE")
 
