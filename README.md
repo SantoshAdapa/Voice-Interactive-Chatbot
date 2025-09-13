@@ -57,14 +57,20 @@ The chatbot also features a **Flask-powered web interface** where users can swit
 ---
 
 ## 📂 Project Structure
-    Voice-Interactive-Chatbot/
-    │── chatbot.py          # Main chatbot (voice + Flask web)
-    │── personas.py         # Persona definitions
-    │── requirements.txt    # Python dependencies
-    │── website/
-    │   └── index.html      # Web interface template
-    └── README.md           # Project documentation
-
+    ```
+    website/
+    ├── __pycache__/
+    │   └── personas.cpython-313.pyc
+    ├── static/
+    │   ├── script.js
+    │   ├── styles.css
+    │   └── templates/
+    ├── index.html
+    ├── app.py
+    ├── personas.py
+    README.md
+    chatbot.py
+    requirements.txt
 ---
 
 ## ✨ Example Personas
