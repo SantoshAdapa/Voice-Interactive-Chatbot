@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice Chatbot</title>
+<style>
+    :root {
+        --bg: #f4f4f5;
+        --chat-bg: #ffffff;
+        --text-color: #111827;
+        --bubble-user: #4f46e5;
+        --bubble-bot: #e0e7ff;
+        --border-radius: 18px;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: var(--bg);
+        color: var(--text-color);
+        margin: 0;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    #persona, #user-input {
+        font-size: 1rem;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin: 10px 0;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    #chat-box {
+        width: 100%;
+        max-width: 600px;
+        height: 460px;
+        background-color: var(--chat-bg);
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow-y: auto;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .bubble {
+        padding: 12px 16px;
+        margin: 8px 0;
+        max-width: 80%;
+        border-radius: var(--border-radius);
+        position: relative;
+        word-wrap: break-word;
+        line-height: 1.5;
+    }
+
+    .user {
+        align-self: flex-end;
+        background-color: var(--bubble-user);
+        color: white;
+        border-bottom-right-radius: 0;
+    }
+
+    .bot {
+        align-self: flex-start;
+        background-color: var(--bubble-bot);
+        color: #111827;
+        border-bottom-left-radius: 0;
+    }
+
+    #controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    button {
+        background-color: #4f46e5;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+        background-color: #3730a3;
+    }
+
+    #typing-indicator {
+        font-style: italic;
+        font-size: 14px;
+        margin-top: 5px;
+        color: #6b7280;
+        display: none;
+    }
+
+    @media (max-width: 640px) {
+        #chat-box, #user-input {
+            width: 90%;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+    <h2>🎙️ Voice Chatbot</h2>
+
+    <select id="persona">
+        <option value="raju">Raju (Khaleja)</option>
+        <option value="baahubali">Baahubali</option>
+        <option value="assistant">Personal Assistant</option>
+    </select>
+
+    <div id="chat-box"></div>
+
+    <input type="text" id="user-input" placeholder="Type your message..." />
+
+    <div id="controls">
+        <button onclick="sendText()">Send</button>
+        <button onclick="startVoiceInput()">🎤 Voice</button>
+        <button onclick="clearChat()">🧹 Clear</button>
+    </div>
+
+    <script>
+    const chatBox = document.getElementById("chat-box");
+    const input = document.getElementById("user-input");
+    const personaSelector = document.getElementById("persona");
+
+    const typingIndicator = document.createElement("div");
+    typingIndicator.id = "typing-indicator";
+    typingIndicator.textContent = "Thinking...";
+    chatBox.appendChild(typingIndicator);
+
+    input.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            sendText();
+        }
+    });
+
+    function appendBubble(message, sender) {
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${sender}`;
+        bubble.innerHTML = message;
+        chatBox.insertBefore(bubble, typingIndicator);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendText() {
+        const userInput = input.value.trim();
+        if (!userInput) return;
+
+        const persona = personaSelector.value;
+
+        appendBubble(userInput, "user");
+        input.value = "";
+
+        typingIndicator.style.display = "block";
+
+        fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user_input: userInput, persona: persona })
+        })
+        .then(response => response.json())
+        .then(data => {
+            typingIndicator.style.display = "none";
+            appendBubble(data.reply, "bot");
+            speakText(data.reply);
+        });
+    }
+
+    function startVoiceInput() {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = "en-IN";
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            input.value = transcript;
+            sendText();
+        };
+
+        recognition.onerror = function(event) {
+            alert("Voice input error: " + event.error);
+        };
+    }
+
+    function clearChat() {
+        chatBox.innerHTML = "";
+        chatBox.appendChild(typingIndicator);
+    }
+
+    function speakText(text) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1;
+        speechSynthesis.speak(utterance);
+    }
+</script>
+
+
+</body>
+</html>
