@@ -5,7 +5,7 @@ from personas import personas
 app = Flask(__name__)
 
 # Configure Gemini
-genai.configure(api_key="AIzaSyABTXjCM1EKoytDAbSbut9XA-B3EE18uWE")
+genai.configure(api_key=""GEMINI_API_KEY", "REPLACE_ME"")
 model = genai.GenerativeModel("gemini-2.0-flash")
 
 @app.route('/')
@@ -30,3 +30,4 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
