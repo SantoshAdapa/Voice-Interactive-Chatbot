@@ -3,7 +3,7 @@ import speech_recognition as sr
 import pyttsx3
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyABTXjCM1EKoytDAbSbut9XA-B3EE18uWE")
+genai.configure(api_key=""GEMINI_API_KEY", "REPLACE_ME"")
 model = genai.GenerativeModel("gemini-2.0-flash")
 
 # Initialize text-to-speech engine
@@ -74,3 +74,4 @@ while True:
     reply = generate_reply(user_input)
     print(f"🤖 Bot: {reply}")
     speak(reply)
+
